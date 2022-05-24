@@ -57,7 +57,7 @@
                                     <button class="btn btn-primary w-100" type="submit" tabindex="2">Envoyer</button>
                                 </form>
                                 <p class="text-center mt-2">
-                                    <a href="{{asset('org/login')}}"> <i data-feather="chevron-left"></i>Page de connexion</a>
+                                    <a href="{{route('org.home')}}"> <i data-feather="chevron-left"></i>Page de connexion</a>
                                 </p>
                             </div>
                         </div>
