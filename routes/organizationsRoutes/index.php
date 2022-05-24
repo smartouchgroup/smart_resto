@@ -34,8 +34,6 @@ Route::prefix('org')->group(function () {
     // Route::post('sendLink',[AuthController::class,'sendLink']);
     // Route::get('reset_password/{token}', [AuthController::class, 'reset_password'])->name('reset_password');
     // Route::post('submitResetPasswordForm', [AuthController::class, 'submitResetPasswordForm']);
-
-
 Route::get('forget-password', [AuthController::class, 'showForgetPasswordForm'])->name('forget.password');
 Route::post('forget-password', [AuthController::class, 'submitForgetPasswordForm'])->name('forget.password');
 Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('reset.password.get');

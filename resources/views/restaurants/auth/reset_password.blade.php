@@ -90,7 +90,7 @@
                             </form>
 
                             <p class="text-center mt-2">
-                                <a href="{{ route('restaurant.login') }}"> <i data-feather="chevron-left"></i> Connexion</a>
+                                <a href="{{ route('restaurant.home') }}"> <i data-feather="chevron-left"></i> Retour</a>
                             </p>
                         </div>
                     </div>
