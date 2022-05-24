@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restaurantsControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Command;
+use App\Models\Dish;
 use App\Models\Org_resto;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -63,6 +64,7 @@ class AuthController extends Controller
         $getNumberCommand = Command::where('restaurantId',Auth::user()->id)->where('done',0)->get();
         $getOrg = Org_resto::where('restaurant_id',$restaurantId->id)->get();;
         $getNumberValidateCommand = Command::where('restaurantId',Auth::user()->id)->where('done',1)->get();
+
         return view('restaurants.home',compact('getSlogan','getNumberCommand','getNumberValidateCommand','getOrg'));
     }
 
