@@ -94,8 +94,8 @@
                                     <label class="form-label" for="firstname">Nom</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="user"></i></span>
-                                        <input type="text" id="firstname" class="form-control" name="lastname"
-                                            placeholder="Nom du restaurant" value="{{ $employee->user->lastname }}" required />
+                                        <input type="text" id="firstname" class="form-control" name="firstname"
+                                            placeholder="Nom du restaurant" value="{{ $employee->user->firstname }}" required />
                                     </div>
                                     @error('firstname')
                                     <div class="text-danger">
@@ -114,11 +114,11 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-1">
-                                    <label class="form-label" for="lastname">Prénom(s)</label>
+                                    <label class="form-label" for="lastname">Nom</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="user"></i></span>
-                                        <input type="text" id="lastname" class="form-control" name="fistname"
-                                            placeholder="Prénom de l'employé" value="{{ $employee->user->firstname }}" />
+                                        <input type="text" id="lastname" class="form-control" name="lastname"
+                                            placeholder="Prénom de l'employé" value="{{ $employee->user->lastname }}" required />
                                     </div>
                                     @error('lastname')
                                     <div class="text-danger">
@@ -164,7 +164,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="smartphone"></i></span>
                                         <input type="number" id="phone" class="form-control" name="phone"
-                                            placeholder="70 XX XX XX" value="{{ $employee->user->phone }}" required />
+                                            placeholder="00226 XX XX XX XX" value="{{ $employee->user->phone }}" required />
                                     </div>
                                     @error('phone')
                                     <div class="text-danger">
