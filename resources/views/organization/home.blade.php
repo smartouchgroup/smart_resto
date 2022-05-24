@@ -5,9 +5,6 @@
 @include('organization.components.header')
     <!-- BEGIN: Main Menu-->
 @include('organization.components.horizontalBar')
-    <!-- END: Main Menu-->
-
-    <!-- BEGIN: Content-->
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -18,10 +15,10 @@
                 <!-- Dashboard Ecommerce Starts -->
                 <section id="dashboard-ecommerce">
                     <div class="row match-height">
-                        <!-- Medal Card -->
                         <div class="col-xl-4 col-md-6 col-12">
                             <div class="card card-congratulation-medal">
                                 <div class="card-body">
+
                                     <h5>Bienvenue <span>{{ Auth::user()->firstname }}</span></h5>
                                     <p class="card-text font-small-3">{{ $getSlogan->slogan }}</p>
                                     <a href="{{ asset('org/add_employees') }}">
@@ -30,10 +27,8 @@
                                     <img src="{{asset('dashboard/app-assets/images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
                                 </div>
                             </div>
+                         
                         </div>
-                        <!--/ Medal Card -->
-
-                        <!-- Statistics Card -->
                         <div class="col-xl-8 col-md-6 col-12">
                             <div class="card card-statistics">
                                 <div class="card-header">
@@ -86,10 +81,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!--/ Statistics Card -->
                     </div>
-
                     <div class="row match-height">
+
                         <!-- Company Table Card -->
                         <div class="col-lg-8 col-12">
                             <div class="card card-company-table">
@@ -238,13 +232,11 @@
 
                     </div>
                 </section>
-                <!-- Dashboard Ecommerce ends -->
-
+               
             </div>
         </div>
     </div>
-    <!-- END: Content-->
-
+ 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
@@ -252,6 +244,6 @@
     <span class='text-center'>
         @include('organization.components.footer')
     </span>
+
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
-    <!-- END: Footer-->
 @endsection
