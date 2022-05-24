@@ -1,0 +1,63 @@
+@font-face {
+    font-family: MochiyPopPOne;
+    src: url(fonts/MochiyPopPOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: regularRoboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+
+body {font-family: regularRoboto !important;}
+
+:root {
+    --primar: #ee782c;
+}
+.bg-primar {background: var(--primar) !important;}
+
+.gray_color {
+    color: #757575;
+}
+.space_top {
+    margin-top: 75px;
+}
+.fond {
+    background-color: #eceaea;
+}
+.carde {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+  }
+
+.form-control:focus {
+    border: .1px solid rgba(255, 136, 0, 0.5) !important;
+    box-shadow: none !important;
+}
+
+.smt_group{
+    margin-top: 100px;
+}
+@media (max-width: 768px) {
+
+    .sup{
+        display: none;
+    }
+   .center_bloc{
+   margin-left: 100px;
+   }
+}
