@@ -114,7 +114,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($employees as $employee)
+                                    @forelse ($employees as $employee)
                                     <tr>
                                         <td>
                                             @if (stristr($employee->user->profile, 'avatar.png'))
@@ -202,8 +202,12 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @empty
+                                        <div class="alert alert-warning text-center" role="alert">
+                                            Aucune commande en cours
+                                          </div>
                                     </tr>
-                                    @endforeach
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -314,7 +318,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="smartphone"></i></span>
                                         <input type="number" id="phone" class="form-control" name="phone"
-                                            placeholder="00226 XX XX XX XX" @if(old('smartphone'))
+                                            placeholder=" 70 XX XX XX" @if(old('smartphone'))
                                             value="{{ old('smartphone') }}" @endif required />
                                     </div>
                                     @error('phone')

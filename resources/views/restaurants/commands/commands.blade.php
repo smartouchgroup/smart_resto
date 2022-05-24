@@ -32,7 +32,7 @@
                             <h2 class="content-header-title float-start mb-0">Commandes</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Liste des commandes en cours</a>
+                                    <li class="breadcrumb-item"><a href="#">Liste des commandes </a>
                                     </li>
                                 </ol>
                             </div>
@@ -62,7 +62,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Liste des commandes</h4>
+                                <h4 class="card-title">Liste des commandes en cours</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped">

@@ -157,6 +157,7 @@ class PersonnelsController extends Controller
         }
 
         $inputsKey = array_slice(array_keys($request->all()), 2, 5);
+   
         $inputs = [];
 
         foreach($inputsKey as $key) $inputs[$key] = $request->$key;
