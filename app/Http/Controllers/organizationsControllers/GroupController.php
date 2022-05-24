@@ -20,7 +20,7 @@ class GroupController extends Controller
     {
 
         $organization = Organization::whereRelation('User', 'uuid', '=', auth()->user()->uuid)->first();
-        $backgrounds = Organization::all()->where('userId','=',Auth::user()->id);
+        $backgrounds = Organization::where('userId','=',Auth::user()->id);
         $groups = $organization->groups;
         $booleanArray = array_map(function ($group) {
             return $group->isPrincipal;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\organizationsControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,6 +119,11 @@ class AuthController extends Controller
     }
     public function home()
     {
-        return view('organization.home');
+        $getSlogan = Organization::where('userId',Auth::user()->id)->first();
+        $organization = Organization::whereRelation('User', 'uuid', '=', auth()->user()->uuid)->first();
+        $employees = $organization->employees;
+        $groups = $organization->groups;
+        $getRestaurants = Auth::user()->custom->restaurants;
+        return view('organization.home',compact('getSlogan','employees','groups','getRestaurants'));
     }
 }
