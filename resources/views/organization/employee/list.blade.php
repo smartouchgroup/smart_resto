@@ -202,6 +202,10 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @empty
+                                        <div class="alert alert-warning text-center" role="alert">
+                                            Aucun employé
+                                          </div>
                                     </tr>
                                     @endforeach
                                 </tbody>

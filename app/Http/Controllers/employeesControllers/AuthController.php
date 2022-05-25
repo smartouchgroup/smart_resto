@@ -146,7 +146,7 @@ class AuthController extends Controller
             $request->profile->storeAs('user_profile', $filename, 'public');
             Auth()->user()->update(['profile' => $filename]);
         }
-        return back()->with('successData', 'Vous avez changer votre profile');
+        return back()->with('successData', 'Vous avez changé votre profile');
     }
 
 

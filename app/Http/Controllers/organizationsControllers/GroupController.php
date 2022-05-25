@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -22,12 +23,14 @@ class GroupController extends Controller
     {
 
         $organization = Organization::whereRelation('User', 'uuid', '=', auth()->user()->uuid)->first();
-        $backgrounds = Organization::where('userId','=',Auth::user()->id);
+        $backgrounds = Organization::where('userId', '=', Auth::user()->id);
         $groups = $organization->groups;
-        $booleanArray = array_map(function ($group) {
-            return $group->isPrincipal;
-        },
-        Collection::unwrap($groups));
+        $booleanArray = array_map(
+            function ($group) {
+                return $group->isPrincipal;
+            },
+            Collection::unwrap($groups)
+        );
         $principalExist = in_array(1, $booleanArray);
         $groups = Group::paginate(8)->fragment('groups');
         return view('organization.groups.list', [
@@ -40,8 +43,7 @@ class GroupController extends Controller
         $groups = Group::all();
         $organization = Organization::whereRelation('User', 'uuid', '=', $request->session()->get('org__key'))->first();
 
-        return view('organization.groups.list', ['groups' => $groups],['organization' => $organization]);
-
+        return view('organization.groups.list', ['groups' => $groups], ['organization' => $organization]);
     }
 
     /**
@@ -75,7 +77,7 @@ class GroupController extends Controller
         if ($request->isPrincipal) {
             $inputs['isPrincipal'] = true;
         }
-        $organizationId = Organization::where('userId',Auth::user()->id)->first()->id;
+        $organizationId = Organization::where('userId', Auth::user()->id)->first()->id;
 
         $inputs['organizationId'] = $organizationId;
 
@@ -132,10 +134,7 @@ class GroupController extends Controller
             'localization'
         ]);
         Group::find($id)->update($inputs);
-
-
         return redirect()->intended('org/groups')->with('success', 'Les informations du groupe ont été modifié avec succes');
-
     }
 
     /**
@@ -146,6 +145,18 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
+        $groups = Group::find($id);
+        $employee = Employee::where('groupId', $groups->id)->first();
+        if ($employee === null) {
+            $groups->delete();
+            return redirect()->back()->with('success', 'Le groupe a été retiré avec succes');
+        } elseif ($employee != null) {
+            $users = $employee->user->id;
+            $deleteUser = User::where('id', $users)->first();
+            $deleteUser->delete();
+            $groups->delete();
+            return redirect()->back()->with('success', 'Le groupe a été retiré avec succes');
+        }
       
     }
 }
