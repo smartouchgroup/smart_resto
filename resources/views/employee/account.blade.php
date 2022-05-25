@@ -39,7 +39,7 @@
                                 <h5 class="family_popone">{{ Auth::user()->phone }}</h5>
                             </div>
                             <div class="p-1 d-flex justify-content-between align-items-center">
-                                <h5>Addresse email :</h5>
+                                <h5>Adresse email :</h5>
                                 <h5 class="family_popone">{{ Auth::user()->email }}</h5>
                             </div>
                             <div class="p-1 d-flex justify-content-between align-items-center">

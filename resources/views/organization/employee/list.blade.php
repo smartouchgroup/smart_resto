@@ -204,7 +204,7 @@
                                         </td>
                                         @empty
                                         <div class="alert alert-warning text-center" role="alert">
-                                            Aucune commande en cours
+                                            Aucun employé
                                           </div>
                                     </tr>
                                     @endforelse

@@ -39,7 +39,7 @@
                                         href=""> Détails {{
                                         $organization->user->firstname }}</a>
 
-                                        
+
                                 </li>
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('groups.index') }}">Liste des
@@ -112,7 +112,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach (Auth::user()->custom->groups as $groupe)
+                                    @forelse (Auth::user()->custom->groups as $groupe)
                                     <tr>
                                         @if ($groupe->isPrincipal)
                                             <td class="fw-bold text-success">Principal</td>
@@ -172,7 +172,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                             Vous êtes sur le point de supprimer ce groupe
-                                                            Cette action est irréversible!!!Etes-vous vraiment sûr ?
+                                                            Cette action entrainera la suppression des employés affiliés à ce groupe!!!Etes-vous vraiment sûr ?
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form action="" method="post" id="delete__dish__form">
@@ -185,8 +185,12 @@
                                                     </div>
                                                 </div>
                                         </td>
+                                        @empty
+                                        <div class="alert alert-warning text-center" role="alert">
+                                            Aucun groupe
+                                          </div>
                                     </tr>
-                                    @endforeach
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
