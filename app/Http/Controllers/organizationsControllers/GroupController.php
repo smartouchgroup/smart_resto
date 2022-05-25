@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\organizationsControllers;
 // use App\Http\Controllers\organizationsControllers\Collection;
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Group;
 use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -144,8 +146,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        $groups = Group::find($id);
-        $groups->delete();
-        return redirect()->back()->with('success', 'Le groupe a été retiré avec succes');
+      
     }
 }
