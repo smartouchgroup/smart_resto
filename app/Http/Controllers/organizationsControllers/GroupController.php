@@ -157,5 +157,6 @@ class GroupController extends Controller
             $groups->delete();
             return redirect()->back()->with('success', 'Le groupe a été retiré avec succes');
         }
+      
     }
 }
