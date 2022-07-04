@@ -114,7 +114,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @forelse ($employees as $employee)
+                                    @foreach ($employees as $employee)
                                     <tr>
                                         <td>
                                             @if (stristr($employee->user->profile, 'avatar.png'))
@@ -207,7 +207,7 @@
                                             Aucun employé
                                           </div>
                                     </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -269,7 +269,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-1">
-                                    <label class="form-label" for="email">Adresse email</label>
+                                    <label class="form-label" for="email">Addresse email</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="mail"></i></span>
                                         <input type="email" id="email" class="form-control" name="email"
@@ -318,7 +318,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i data-feather="smartphone"></i></span>
                                         <input type="number" id="phone" class="form-control" name="phone"
-                                            placeholder=" 70 XX XX XX" @if(old('smartphone'))
+                                            placeholder="00226 XX XX XX XX" @if(old('smartphone'))
                                             value="{{ old('smartphone') }}" @endif required />
                                     </div>
                                     @error('phone')

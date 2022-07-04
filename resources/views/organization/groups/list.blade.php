@@ -3,27 +3,23 @@
 @include('organization.components.header')
 @include('organization.components.horizontalBar')
 <!-- BEGIN: Vendor CSS-->
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/vendors/css/vendors.min.css')}}">
-<link rel="stylesheet" type="text/css"
-    href="{{asset('dashboard/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css')}}">
-<link rel="stylesheet" type="text/css"
-    href="{{asset('dashboard/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css')}}">
-<link rel="stylesheet" type="text/css"
-    href="{{asset('dashboard/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css')}}">
-<link rel="stylesheet" type="text/css"
-    href="{{asset('dashboard/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css')}}">
-<link rel="stylesheet" type="text/css"
-    href="{{asset('dashboard/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
+<!-- BEGIN: Vendor CSS-->
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/vendors.min.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/bootstrap.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/bootstrap-extended.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/colors.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/components.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/themes/dark-layout.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/themes/bordered-layout.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('dashboard/app-assets/css/themes/semi-dark-layout.css')}}">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/components.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/themes/dark-layout.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/themes/bordered-layout.css">
+<link rel="stylesheet" type="text/css" href="dashboard/app-assets/css/themes/semi-dark-layout.css">
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -34,18 +30,22 @@
                     <div class="col-12">
                         <h2 class="content-header-title float-start mb-0">Groupes</h2>
                         <div class="breadcrumb-wrapper">
+                            @foreach ($backgrounds as $background)
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a
                                         href=""> Détails {{
                                         $organization->user->firstname }}</a>
-
-
                                 </li>
                                 <li class="breadcrumb-item"><a
-                                        href="{{ route('groups.index') }}">Liste des
-                                        groupes</a>
+                                        href="{{ route('groups.index') }}">
+                                        <span
+                                        @if ($background->background)
+                                        style="color: {{ $background->background }} !important;"
+                                        @endif">
+                                        Liste des Groupes</span></a>
                                 </li>
                             </ol>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,8 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
                     </svg>
-                    <span>Impossible d'ajouter une nouveau groupe veuillez réesayer</span>
+                    <span>Une erreur s'est produite lors de l'ajout d'un groupe à la structure {{
+                        $organization->user->firstname }}!</span>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -87,9 +88,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <h4 class="card-title">Liste des groupes
+                            <h4 class="card-title">Liste des groupes {{ strtoupper($organization->user->firstname) }}
                             </h4>
-                            <button class="dt-button create-new btn btn-primary" tabindex="0"
+                            <button class="dt-button create-new btn btn-primary"  @if ($background->background)
+                                style="background-color: {{ $background->background }} !important;"
+                                @endif tabindex="0"
                                 aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
                                 data-bs-target="#modals-slide-in"><span><svg xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -107,15 +110,16 @@
                                         <th>Nom</th>
                                         <th>Téléphone</th>
                                         <th>Localisation</th>
+                                        <th>Total des Employers</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @forelse (Auth::user()->custom->groups as $groupe)
+                                    @foreach ($groups as $groupe)
                                     <tr>
                                         @if ($groupe->isPrincipal)
-                                            <td class="fw-bold text-success">Principal</td>
+                                        <td class="fw-bold text-success">Principal</td>
                                         @else
                                         <td></td>
                                         @endif
@@ -128,7 +132,9 @@
                                         <td>
                                             {{ $groupe->localization }}
                                         </td>
-
+                                        <td>
+                                            {{ count($groupe->employees) }}
+                                        </td>
                                         <td class="d-flex justify-content-center">
                                             <a href="{{ route('groups.show', $groupe->id) }}">
                                                 <button type="submit" class="dropdown-item d-flex align-items-center">
@@ -161,51 +167,52 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EA5455" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash me-50"><polyline points="3 6 5 6 21 6" class="text-danger"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" ></path></svg>
                                                 <span class="text-danger">Supprimer</span>
                                             </button>
-                                             <!-- Button trigger modal -->
-                                                <!-- Modal -->
                                                 <div class="modal fade modal-danger text-start" id="deleteModal" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="myModalLabel120">Attention !!!</h5>
+                                                                <h5 class="modal-title" id="myModalLabel120"><span
+                                                                    @if ($background->background)
+                                                                    style="color: {{ $background->background }} !important;"
+                                                                    @endif">
+                                                                    Attention !!!</span></h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                             Vous êtes sur le point de supprimer ce groupe
-                                                            Cette action entrainera la suppression des employés affiliés à ce groupe!!!Etes-vous vraiment sûr ?
+                                                            Cette action est irréversible!!!Etes-vous vraiment sûr ?
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form action="" method="post" id="delete__dish__form">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
+                                                                    <button type="submit" class="btn btn-primary data-submit me-1" data-bs-dismiss="modal" @if ($background->background)
+                                                                        style="background-color: {{ $background->background }} !important;"@endif>Supprimer
+                                                                    </button>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                         </td>
-                                        @empty
-                                        <div class="alert alert-warning text-center" role="alert">
-                                            Aucun groupe
-                                          </div>
                                     </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
+                            {{ $groups->links() }}
                         </div>
                     </div>
                 </div>
             </section>
             <div class="modal modal-slide-in fade show" id="modals-slide-in" aria-modal="true">
                 <div class="modal-dialog sidebar-sm">
-                <form action="{{route('groups.store')}}" method="post" class="add-new-record modal-content pt-0">
+                    <form action="{{route('groups.store')}}" method="post" class="add-new-record modal-content pt-0">
                         @csrf
                         <div class="modal-header mb-1">
-                            <h5 class="modal-title" id="exampleModalLabel">Formulaire d'ajout d'un groupe</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Formulaire d'ajout de structure</h5>
                         </div>
                         <div class="modal-body flex-grow-1">
-
+                            <input type="hidden" name="organization" value="{{ $organization->user->uuid }}" required>
                             <div class="mb-1">
                                 <label class="form-label" for="firstname">Nom du groupe</label>
                                 <div class="input-group input-group-merge">
@@ -269,7 +276,19 @@
                                 </div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary data-submit me-1">Ajouter</button>
+                            @if (!$principalExist)
+                            <div class="mb-1">
+                                <div class="form-check form-check-primary">
+                                    <input type="checkbox" name="isPrincipal" class="form-check-input" id="isPrincipal"
+                                        value="1">
+                                    <label class="form-check-label" for="isPrincipal">Choisir en tant qu'agence
+                                        principal</label>
+                                </div>
+                            </div>
+                            @endif
+                            <button type="submit" class="btn btn-primary data-submit me-1" @if ($background->background)
+                                style="background-color: {{ $background->background }} !important;"
+                                @endif>Ajouter</button>
                             <button type="reset" class="btn btn-outline-secondary"
                                 data-bs-dismiss="modal">Fermer</button>
                         </div>
